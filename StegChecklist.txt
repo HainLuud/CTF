@@ -1,0 +1,45 @@
+File [file]
+
+Binwalk [file]
+
+Exiftool [file]
+
+Strings [file] (| grep -n 7)
+
+java -jar ~/Hack_bin/stegsolve.jar
+
+xxd -b [file]
+
+compare [file1] original.png -compose src diff.png
+
+python ~/Hack_bin/stegoVeritas-master/stegoveritas.py -meta -imageTransform -bruteLSB [file]
+
+-------JPG------
+steghide extract -sf [file]
+
+stegcracker [file] ([dictionary])
+
+/root/Hack_bin/stegdetect-master[stegbreak/stegdetect/stegcompare] [file]
+
+-------PNG------
+java -jar ~/Hack_bin/stegsolve.jar
+
+pngcheck -v
+
+zsteg
+
+java -jar ~/StegExpose-master/StegExpose.jar [folder containing PNG or BMP]
+
+convert input.png output.xpm 
+
+-------MP3------
+Sonic Visualiser
+
+Audacity
+
+MP3Stego (Kasutusjuhend on kausta see Hck repos)
+
+-------MP4------
+
+-----QR Code----
+zbarimg

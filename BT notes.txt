@@ -1,0 +1,9 @@
+w - Show who is logged on and what they are doing.
+find . -mmin -15 -ls 2>/dev/null (looks for files modified in the last 15 minutes)
+ss -antp (list all TCP connections and their PIDs) | grep ESTAB | grep -v '10.5.60.11'
+ps -axjf
+find . -type f -exec cat {} +
+
+"I like that our most vulnerable network has the weapons system in it" Locked Shields 2021
+"las ta proovib, ega ma ka seda parooli ei tea." (öeldes seda kommentaari peale, et keegi admin kasutajat brute-force'ib) - Locked Shields 2021
+

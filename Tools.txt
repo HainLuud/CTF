@@ -1,0 +1,19 @@
+File format steganography:
+Kaitai Struct
+
+GTFO Bins (commands with SUID bits and sudo for escalation):
+https://gtfobins.github.io/
+
+Payload All The Things
+https://github.com/swisskyrepo/PayloadsAllTheThings
+
+Broken PNG/zip
+https://github.com/gynvael/random-stuff/tree/master/brute_zlib
+# See tekitab palju .bin faile ja kui sealt valida kõige tõenäolisema faili (suurim maht), ja selle ümber nimetades .raw siis seda saab avada GIMP-is ("Load image from Raw Data"). Seal tuleks width-i suurendada. Check this [https://youtu.be/gHlundcY9GA?t=6782]
+
+General vulnbox strats
+https://bitvijays.github.io/LFC-VulnerableMachines.html
+
+Linux privilege escalation script
+linPEAS @ https://github.com/carlospolop/privilege-escalation-awesome-scripts-suite/tree/master/linPEAS
+LinEnum @ https://github.com/rebootuser/LinEnum

